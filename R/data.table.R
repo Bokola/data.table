@@ -1195,7 +1195,7 @@ chmatch2 <- function(x, table, nomatch=NA_integer_) {
             newnames = NULL
             suppPrint = identity
             if (length(av) && av[1L] == ":=") {
-                if (identical(attr(x,".data.table.locked"),TRUE)) stop(".SD is locked. Using := in .SD's j is reserved for possible future use; a tortuously flexible way to modify by group. Use := in j directly to modify by group by reference.")
+                if (identical(attr(x,".data.table.locked"),TRUE)) x=copy(x)
                 suppPrint <- function(x) { .global$print=address(x); x }
                 # Suppress print when returns ok not on error, bug #2376. Thanks to: http://stackoverflow.com/a/13606880/403310
                 # All appropriate returns following this point are wrapped; i.e. return(suppPrint(x)).
